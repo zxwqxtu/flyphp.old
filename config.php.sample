@@ -1,0 +1,24 @@
+<?php
+/**
+ * 配置文件
+ *
+ */
+return array(
+    'app' => array(
+        'blog.com' => 'blog',
+    ),
+    'timezone' => 'Asia/Shanghai',
+    'debug' => true,
+    'errorLog' => '',
+    'charset' => 'UTF-8',
+    'indexController' => '',
+    'importClassPath' => array(
+        'controllers',
+        'models',
+        'libs',
+        'boot'
+    ),
+    'require' => array(
+    #   'vendor/autoload.php'
+    )
+);

@@ -1,0 +1,24 @@
+{
+    "name": "bePhp/bePhp",
+    "description": "php framework easy simple",
+    "keywords": ["bePhp", "php", "framework"],
+    "homepage": "https://github.com/zxwqxtu/phplib.git",
+    "type": "library",
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Boot\\": "boot", 
+            "Controllers\\": "controllers", 
+            "Libs\\": "libs",
+            "Models\\": "models"
+        }
+    },
+    "authors": [
+        {
+            "name": "wangqiang",
+            "email": "960875184@qq.com"
+        }
+    ]
+} 
