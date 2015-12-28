@@ -22,16 +22,16 @@ namespace Libs;
  * @author   wangqiang <960875184@qq.com>
  */
 
-abstract class Single
+Trait Single
 {
     /** @var object|null 实例对象 */
-    protected static $instance = null;
+    private static $_instance = null;
 
     /**
      * 构造函数
      *
      */
-    final protected function __construct()
+    final private function __construct()
     {
         $this->init();
     }
@@ -53,10 +53,10 @@ abstract class Single
      */
     final public static function getInstance()
     {
-        if (empty(self::$instance)) {
+        if (empty(self::$_instance)) {
             $className = get_called_class();
-            self::$instance = new $className();
+            self::$_instance = new $className();
         }        
-        return self::$instance;
+        return self::$_instance;
     }
 }

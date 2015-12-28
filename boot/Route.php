@@ -24,8 +24,10 @@ use Libs\Common;
  * @package  Boot
  * @author   wangqiang <960875184@qq.com>
  */
-class Route extends Single
+class Route
 {
+    //使用单例
+    use Single;
     /**
      * @var array 路由器组
      */

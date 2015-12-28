@@ -25,8 +25,11 @@ use Boot\Route;
  * @package  Boot
  * @author   wangqiang <960875184@qq.com>
  */
-class Init extends Single
+class Init
 {
+    //使用单例
+    use Single;
+
     /** @var \Boot\Route 路由器对象 */
     private $_route = null;
 
