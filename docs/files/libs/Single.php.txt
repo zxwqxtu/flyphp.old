@@ -60,3 +60,4 @@ Trait Single
         return self::$_instance;
     }
 }
+

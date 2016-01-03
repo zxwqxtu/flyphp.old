@@ -9,5 +9,5 @@ return array(
         'models',
         'libs',
         'boot'
-    ),
+    )
 );
