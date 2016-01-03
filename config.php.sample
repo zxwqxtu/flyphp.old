@@ -12,12 +12,7 @@ return array(
     'errorLog' => '',
     'charset' => 'UTF-8',
     'indexController' => '',
-    'importClassPath' => array(
-        'controllers',
-        'models',
-        'libs',
-        'boot'
-    ),
+    'importClassPath' => array(),
     'require' => array(
     #   'vendor/autoload.php'
     )

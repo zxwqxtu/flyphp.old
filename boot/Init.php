@@ -12,8 +12,8 @@
  */
 namespace Boot;
 
-use Libs\Common;
-use Libs\Single;
+use Core\Config;
+use Core\Single;
 use Boot\Route;
 
 /**
@@ -44,8 +44,8 @@ class Init
         ini_set('log_errors', 'On');
         defined('DEBUG') && ini_set('display_errors', intval(DEBUG));
 
-        if (!empty(Common::getConfig('errorLog'))) {
-            $errorLog = Common::getConfig('errorLog');
+        if (!empty(Config::get('errorLog'))) {
+            $errorLog = Config::get('errorLog');
         } else {
             $errorLog = ROOT_PATH . "/logs/".$this->_route->getAppName(); 
             !is_dir($errorLog) && mkdir($errorLog, 0777, true);
@@ -67,15 +67,15 @@ class Init
 
         //定义APP_PATH常量
         define('APP_PATH', ROOT_PATH.'/app/'.$this->_route->getAppName());
-        define('DEBUG', Common::getConfig('debug'));
+        define('DEBUG', Config::get('debug'));
 
         //log日志
         $this->logError();
         //时区
-        date_default_timezone_set(Common::getConfig('timezone'));
+        date_default_timezone_set(Config::get('timezone'));
         
         //加载必要的文件
-        $requireFiles = Common::getConfig('require'); 
+        $requireFiles = Config::get('require'); 
         if (!empty($requireFiles)) {
             foreach ($requireFiles as $v) {
                 require_once APP_PATH.DIRECTORY_SEPARATOR.$v;
@@ -94,7 +94,7 @@ class Init
         $action = $this->_route->getAction();
         $params = $this->_route->getParams();
 
-        $controller = empty($controller) ? Common::getConfig('indexController') : $controller;
+        $controller = empty($controller) ? Config::get('indexController') : $controller;
         $className = "Controllers\\".ucfirst($controller);
         if (!class_exists($className)) {
             throw new \Exception("controller:{$controller} not exists!");

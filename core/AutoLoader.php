@@ -5,20 +5,20 @@
  * 类自动加载
  *
  * @category AutoLoader
- * @package  Libs
+ * @package  Core 
  * @author   wangqiang <960875184@qq.com>
  * @tag      AutoLoader
  * @version  GIT: $Id$
  */
-namespace Libs;
+namespace Core;
 
 /**
- * AutoLoader
+ * Core\AutoLoader
  *
  * 自动加载类
  *
  * @category AutoLoader
- * @package  Libs
+ * @package  Core
  * @author   wangqiang <960875184@qq.com>
  */
 class AutoLoader

@@ -7,7 +7,7 @@ return array(
     'importClassPath' => array(
         'controllers',
         'models',
-        'libs',
+        'core',
         'boot'
     )
 );

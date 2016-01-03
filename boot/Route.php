@@ -12,8 +12,8 @@
  */
 namespace Boot;
 
-use Libs\Single;
-use Libs\Common;
+use Core\Single;
+use Core\Config;
 
 /**
  * Boot\Route
@@ -70,7 +70,7 @@ class Route
             $this->_route[0] = 'index.php';
 
         } else {
-            $this->_appName = Common::getConfig('app', $_SERVER['HTTP_HOST']);
+            $this->_appName = Config::get('app', $_SERVER['HTTP_HOST']);
 
             $this->_route = explode('/', $_SERVER['PHP_SELF']);
         }

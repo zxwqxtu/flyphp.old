@@ -12,7 +12,7 @@
  */
 namespace Controllers;
 
-use Libs\Common;
+use Core\Config;
 
 /**
  * Base.php
@@ -101,7 +101,7 @@ abstract class Base
      */
     public function getConfig($key=null, $item=null)
     {
-        return Common::getConfig($key, $item);
+        return Config::get($key, $item);
     }
 
     /**

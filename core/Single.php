@@ -5,20 +5,20 @@
  * 单列类 
  *
  * @category Single
- * @package  Libs
+ * @package  Core
  * @author   wangqiang <960875184@qq.com>
- * @tag      Libs Single 
+ * @tag      Core Single 
  * @version  GIT: $Id$
  */
-namespace Libs;
+namespace Core;
 
 /**
- * Libs\Single
+ * Core\Single
  *
  * 单例类
  *
  * @category Single
- * @package  Libs
+ * @package  Core 
  * @author   wangqiang <960875184@qq.com>
  */
 

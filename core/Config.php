@@ -1,27 +1,27 @@
 <?php
 /**
- * Common.php
+ * Config.php
  *
- * 公共方法类
+ * 配置文件类
  *
- * @category Common
- * @package  Libs
+ * @category Config 
+ * @package  Core 
  * @author   wangqiang <960875184@qq.com>
- * @tag      AutoLoader
+ * @tag      Config 
  * @version  GIT: $Id$
  */
-namespace Libs;
+namespace Core;
 
 /**
- * Common
+ * Core\Config
  *
- * 公共方法类
+ * 配置文件类
  *
- * @category Common
- * @package  Libs
+ * @category Config
+ * @package  Core 
  * @author   wangqiang <960875184@qq.com>
  */
-class Common
+class Config 
 {    
     /** @var array 配置数组 */
     private static $_config = null;
@@ -34,12 +34,12 @@ class Common
      *
      * @return string|int|array|null
      */
-    public static function getConfig($key=null, $item=null)
+    public static function get($key=null, $item=null)
     {
         if (!defined('APP_PATH')) {
-            $config = self::getConfigAll();
+            $config = self::getAll();
         } elseif (empty(self::$_config)) {
-            $config = self::$_config = self::getConfigAll();
+            $config = self::$_config = self::getAll();
         } else {
             $config = self::$_config;
         }
@@ -59,7 +59,7 @@ class Common
      *
      * @return array
      */
-    public static function getConfigAll()
+    public static function getAll()
     {
         $files = array(
             SYSTEM_PATH.DIRECTORY_SEPARATOR.'config.php',
