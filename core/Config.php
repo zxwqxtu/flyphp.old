@@ -42,11 +42,12 @@ class Config
     /**
      * 设置config属性
      *
-     * @param string $file 文件前缀名
+     * @param string $file      文件前缀名
+     * @param bool   $recursive 是否用array_merge_recursive
      *
      * @return array
      */
-    public static function load($file = 'config')
+    public static function load($file = 'config', $recursive = false)
     {
         $files = array(
             SYSTEM_PATH.DIRECTORY_SEPARATOR."config/{$file}.php",
@@ -57,11 +58,13 @@ class Config
         }
 
         $config = array();
+        $func = $recursive ? 'array_merge_recursive': 'array_merge';
+
         foreach ($files as $v) {
             if (!file_exists($v)) {
                 continue;
             }
-            $config = array_merge($config, include $v);
+            $config = call_user_func($func, $config, include $v);
         }
 
         return $config;

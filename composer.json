@@ -1,17 +1,18 @@
 {
     "name": "bePhp/bePhp",
     "description": "php framework easy simple",
-    "keywords": ["bePhp", "php", "framework"],
-    "homepage": "https://github.com/zxwqxtu/phplib.git",
+    "keywords": ["flyPHP", "php", "framework"],
+    "homepage": "https://github.com/zxwqxtu/flyPHP",
     "type": "library",
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "phplib/phplib": "dev-master",
     },
     "autoload": {
         "psr-4": {
             "Boot\\": "boot", 
             "Controllers\\": "controllers", 
-            "Libs\\": "libs",
+            "Core\\": "core",
             "Models\\": "models"
         }
     },

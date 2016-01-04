@@ -14,6 +14,6 @@ return array(
     'indexController' => '',
     'importClassPath' => array(),
     'require' => array(
-    #   'vendor/autoload.php'
+    #   SYSTEM_PATH.'/vendor/autoload.php'
     )
 );
