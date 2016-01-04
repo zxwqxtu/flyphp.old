@@ -74,6 +74,9 @@ class Init
         //时区
         date_default_timezone_set(Config::get('timezone'));
         
+        //url解释对应action,controller
+        $this->_route->urlToClass();
+
         //加载必要的文件
         $requireFiles = Config::get('require'); 
         if (!empty($requireFiles)) {

@@ -74,14 +74,12 @@ class Route
 
             $this->_route = explode('/', $_SERVER['PHP_SELF']);
         }
-
-        $this->urlToClass();
     }
 
     /**
      * 路由到控制器
      *
-     * @return void
+     * @return boolean 
      */
     final public function urlToClass()
     {
@@ -96,8 +94,33 @@ class Route
         isset($routeArr[$indexKey+2]) && ($this->_action = $routeArr[$indexKey+2]);
         isset($routeArr[$indexKey+3]) && ($this->_params = array_slice($routeArr, $indexKey+3));
 
+        //url重定向
+        if ($this->urlRewrite()) {
+            return true;
+        }
+
         $this->_controller = $this->seoUrl($this->_controller);
         $this->_action = $this->seoUrl($this->_action);
+
+        return true;
+    }
+
+    /**
+     * url重定向
+     *
+     * @return boolean 
+     */
+    protected function urlRewrite()
+    {
+        $url = "{$this->_controller}/{$this->_action}";
+        $_url = Config::route($url);
+        if (empty($_url)) {
+            return false; 
+        }
+        
+        list($this->_controller, $this->_action) = explode('/', $_url);
+
+        return true;
     }
 
     /**
