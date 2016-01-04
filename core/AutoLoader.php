@@ -73,7 +73,7 @@ class AutoLoader
      */
     public function loadSystem($class)
     {
-        $config = include SYSTEM_PATH.DIRECTORY_SEPARATOR.'config.php';
+        $config = include SYSTEM_PATH.DIRECTORY_SEPARATOR.'config/config.php';
         $classDirs = empty($config['importClassPath'])? array(): $config['importClassPath'];
         foreach ($classDirs as $v) {
             $file = SYSTEM_PATH.DIRECTORY_SEPARATOR.$v.DIRECTORY_SEPARATOR.$class.".php";
@@ -100,7 +100,7 @@ class AutoLoader
         }
         $dirs = array();
 
-        $file = SYSTEM_PATH.DIRECTORY_SEPARATOR.'config.php';
+        $file = SYSTEM_PATH.DIRECTORY_SEPARATOR.'config/config.php';
         if (file_exists($file)) {
             $config = include $file;
             if (!empty($config['importClassPath'])) {
@@ -108,7 +108,7 @@ class AutoLoader
             }
         }
 
-        $file = ROOT_PATH.DIRECTORY_SEPARATOR.'app/config.php';
+        $file = ROOT_PATH.DIRECTORY_SEPARATOR.'app/config/config.php';
         if (file_exists($file)) {
             $config = include $file;
             if (!empty($config['importClassPath'])) {
@@ -116,7 +116,7 @@ class AutoLoader
             }
         }
 
-        $file = APP_PATH.DIRECTORY_SEPARATOR.'config.php';
+        $file = APP_PATH.DIRECTORY_SEPARATOR.'config/config.php';
         if (file_exists($file)) {
             $config = include $file;
             if (!empty($config['importClassPath'])) {

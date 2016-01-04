@@ -24,10 +24,10 @@ namespace Core;
 class Config 
 {    
     /** @var array 配置数组 */
-    private static $_config = null;
+    private static $_config = array();
 
     /**
-     * 获取config文件值
+     * 获取config.php文件值
      *
      * @param string $key    key
      * @param string $item   item 
@@ -36,37 +36,24 @@ class Config
      */
     public static function get($key=null, $item=null)
     {
-        if (!defined('APP_PATH')) {
-            $config = self::getAll();
-        } elseif (empty(self::$_config)) {
-            $config = self::$_config = self::getAll();
-        } else {
-            $config = self::$_config;
-        }
-
-        if (empty($key)) {
-            return $config;
-        }
-        if (empty($item)) {
-            return isset($config[$key])? $config[$key]: null;
-        }
-
-        return isset($config[$key][$item])? $config[$key][$item]: null;
+        return self::config($key, $item);
     }
 
     /**
      * 设置config属性
      *
+     * @param string $file 文件前缀名
+     *
      * @return array
      */
-    public static function getAll()
+    public static function load($file = 'config')
     {
         $files = array(
-            SYSTEM_PATH.DIRECTORY_SEPARATOR.'config.php',
-            ROOT_PATH.DIRECTORY_SEPARATOR.'app/config.php',
+            SYSTEM_PATH.DIRECTORY_SEPARATOR."config/{$file}.php",
+            ROOT_PATH.DIRECTORY_SEPARATOR."app/config/{$file}.php",
         );
         if (defined('APP_PATH')) {
-            $files[] = APP_PATH.DIRECTORY_SEPARATOR.'config.php';
+            $files[] = APP_PATH.DIRECTORY_SEPARATOR."config/{$file}.php";
         }
 
         $config = array();
@@ -78,5 +65,36 @@ class Config
         }
 
         return $config;
+    }
+
+    /**
+     * 魔术方法
+     * 获取配置信息
+     *
+     * @param string $name      method name
+     * @param array  $arguments 魔术方法参数 
+     *
+     * @return string|int|array|null
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        if (!defined('APP_PATH')) {
+            $config = self::load($name);
+        } elseif (empty(self::$_config[$name])) {
+            $config = self::$_config[$name] = self::load($name);
+        } else {
+            $config = self::$_config[$name];
+        }
+
+        $key = empty($arguments[0]) ? null : $arguments[0];
+        $item = empty($arguments[1]) ? null : $arguments[1];
+        if (empty($key)) {
+            return $config;
+        }
+        if (empty($item)) {
+            return isset($config[$key])? $config[$key]: null;
+        }
+
+        return isset($config[$key][$item])? $config[$key][$item]: null;
     }
 }
