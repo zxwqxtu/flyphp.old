@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 if (empty($_SERVER['argv'][1])) {
     exit("please input appName!".PHP_EOL);
