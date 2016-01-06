@@ -89,21 +89,22 @@ class Init
     protected function loadRequire()
     {
         $arr = array(
-            Config::getSystem('require'),
-            Config::getAppRoot('require'),
-            Config::getApp('require')
+            SYSTEM_PATH => Config::getSystem('require'),
+            ROOT_PATH.'/app' => Config::getAppRoot('require'),
+            APP_PATH => Config::getApp('require')
         );
 
-        foreach ($arr as $files) {
+        foreach ($arr as $dir => $files) {
             if (empty($files)) {
                 continue;
             }
 
             foreach ($files as $file) {
-                $file = realpath($file);
-                if (!empty($file)) {
-                    require_once $file;    
+                $realFile = realpath($dir.'/'.$file);
+                if (!empty($realFile)) {
+                    require_once $realFile;    
                 }
+
             }
         }
     }

@@ -9,5 +9,8 @@ return array(
         'models',
         'core',
         'boot'
-    )
+    ),
+    'require' => array(
+    #     'vendor/autoload.php'
+    ),
 );
