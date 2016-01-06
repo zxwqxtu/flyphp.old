@@ -100,4 +100,67 @@ class Config
 
         return isset($config[$key][$item])? $config[$key][$item]: null;
     }
+
+    /**
+     * 获取配置文件内容
+     *
+     * @param string $fileDir 文件目录
+     * @param string $file    文件
+     *
+     * @return array|null;
+     */
+    public static function getByFile($fileDir, $file='config')
+    {
+        $file = $fileDir. "/config/{$file}.php";
+        if (file_exists($file)) {
+            return include $file;
+        }
+
+        return null;
+    }
+
+    /**
+     * 获取框架配置文件内容
+     *
+     * @param string $item item
+     * @param string $file 文件
+     *
+     * @return array|string|null;
+     */
+    public static function getSystem($item, $file='config')
+    {
+        $config = self::getByFile(SYSTEM_PATH, $file);
+
+        return isset($config[$item])? $config[$item]: null;
+    }
+
+    /**
+     * 获取根目录配置文件内容
+     *
+     * @param string $item item
+     * @param string $file 文件
+     *
+     * @return array|string|null;
+     */
+    public static function getAppRoot($item, $file='config')
+    {
+        $config = self::getByFile(ROOT_PATH.'/app', $file);
+
+        return isset($config[$item])? $config[$item]: null;
+    }
+
+    /**
+     * 获取APP目录配置文件内容
+     *
+     * @param string $item item
+     * @param string $file 文件
+     *
+     * @return array|string|null;
+     */
+    public static function getApp($item, $file='config')
+    {
+        $config = self::getByFile(APP_PATH, $file);
+
+        return isset($config[$item])? $config[$item]: null;
+    }
 }

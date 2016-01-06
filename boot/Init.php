@@ -78,10 +78,32 @@ class Init
         $this->_route->urlToClass();
 
         //加载必要的文件
-        $requireFiles = Config::get('require'); 
-        if (!empty($requireFiles)) {
-            foreach ($requireFiles as $v) {
-                require_once APP_PATH.DIRECTORY_SEPARATOR.$v;
+        $this->loadRequire(); 
+    }
+
+    /**
+     * 加载必要的文件
+     *
+     * @return void
+     */
+    protected function loadRequire()
+    {
+        $arr = array(
+            Config::getSystem('require'),
+            Config::getAppRoot('require'),
+            Config::getApp('require')
+        );
+
+        foreach ($arr as $files) {
+            if (empty($files)) {
+                continue;
+            }
+
+            foreach ($files as $file) {
+                $file = realpath($file);
+                if (!empty($file)) {
+                    require_once $file;    
+                }
             }
         }
     }
