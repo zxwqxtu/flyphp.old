@@ -4,6 +4,10 @@
  *
  */
 return array(
+    'timezone' => 'Asia/Shanghai',
+    'charset' => 'UTF-8',
+    'debug' => false,
+
     'importClassPath' => array(
         'controllers',
         'models',
