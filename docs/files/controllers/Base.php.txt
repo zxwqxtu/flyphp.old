@@ -12,7 +12,7 @@
  */
 namespace Controllers;
 
-use Libs\Common;
+use Core\Config;
 
 /**
  * Base.php
@@ -101,7 +101,7 @@ abstract class Base
      */
     public function getConfig($key=null, $item=null)
     {
-        return Common::getConfig($key, $item);
+        return Config::get($key, $item);
     }
 
     /**
@@ -114,8 +114,10 @@ abstract class Base
      */
     final public function output($action, array $params = array())
     {
-        $charset = $this->getConfig('charset');
-        header("Content-type: text/html; charset={$charset}");
+        if (php_sapi_name() != 'cli') {
+            $charset = $this->getConfig('charset');
+            header("Content-type: text/html; charset={$charset}");
+        }
 
         $ret = call_user_func_array(array($this, $action), $params);
         //函数如果没有return，则返回的是null
