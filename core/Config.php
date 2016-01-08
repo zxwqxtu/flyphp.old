@@ -159,6 +159,9 @@ class Config
      */
     public static function getApp($item, $file='config')
     {
+        if (!defined('APP_PATH')) {
+            return null;
+        }
         $config = self::getByFile(APP_PATH, $file);
 
         return isset($config[$item])? $config[$item]: null;

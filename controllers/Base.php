@@ -43,6 +43,9 @@ abstract class Base
     /** @var string 默认Action */
     protected $defaultAction = 'index';
 
+    /** @var string 模板内容 */
+    protected $response = array();
+
     /**
      * 构造函数，不能被继承
      */
@@ -121,13 +124,17 @@ abstract class Base
 
         $ret = call_user_func_array(array($this, $action), $params);
         //函数如果没有return，则返回的是null
-        if (is_array($ret) || is_object($ret)) {
-            exit(json_encode($ret));
-        } elseif (is_string($ret)) {
-            exit($ret);
-        } elseif (!is_null($ret)) {
-            exit; 
+        if (is_null($this->view)) {
+            if (is_array($ret) || is_object($ret)) {
+                exit(json_encode($ret));
+            } elseif (is_string($ret) || is_numeric($ret)) {
+                exit($ret);
+            } else {
+                exit; 
+            }
         }
+
+        $this->response = $ret;
 
         $fileName = APP_PATH.DIRECTORY_SEPARATOR.'views'; 
         if (empty($this->view)) {
