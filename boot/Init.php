@@ -15,6 +15,7 @@ namespace Boot;
 use Core\Config;
 use Core\Single;
 use Boot\Route;
+use Response\Render;
 
 /**
  * Boot\Init
@@ -131,11 +132,18 @@ class Init
 
         $action = empty($action) ? $ctrl->getDefaultAction(): $action;
         if (!empty($action) && !method_exists($className, $action)) {
-            throw new \Exception("controller:{$controller} action:{$action} not exists!");
+            throw new \Exception("CONTROLLER-NO-EXISTS:{$controller}->{$action}");
             return false;
         }
 
-        call_user_func_array(array($ctrl, 'output'), array($action, $params));
+        $data = call_user_func_array(array($ctrl, $action), $params);
+
+        if (php_sapi_name() == 'cli') {
+            Render::getInstance()->output($data);
+        }
+
+        Render::getInstance()->setHeaders($ctrl->getHeaders())
+            ->view($data, $ctrl->getViewFile(), $ctrl->getLayoutFile());
 
         return true;
     }

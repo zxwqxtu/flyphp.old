@@ -46,6 +46,9 @@ abstract class Base
     /** @var string 模板内容 */
     protected $response = array();
 
+    /** @var array 头部 */
+    protected $headers = array();
+
     /**
      * 构造函数，不能被继承
      */
@@ -108,34 +111,11 @@ abstract class Base
     }
 
     /**
-     * 输出结果
+     * 获取view File
      *
-     * @param string $action method方法
-     * @param array  $params method方法的参数
-     *
-     * @return void 
+     * @return string
      */
-    final public function output($action, array $params = array())
-    {
-        if (php_sapi_name() != 'cli') {
-            $charset = $this->getConfig('charset');
-            header("Content-type: text/html; charset={$charset}");
-        }
-
-        $ret = call_user_func_array(array($this, $action), $params);
-        //函数如果没有return，则返回的是null
-        if (is_null($this->view)) {
-            if (is_array($ret) || is_object($ret)) {
-                exit(json_encode($ret));
-            } elseif (is_string($ret) || is_numeric($ret)) {
-                exit($ret);
-            } else {
-                exit; 
-            }
-        }
-
-        $this->response = $ret;
-
+    final public function getViewFile() {
         $fileName = APP_PATH.DIRECTORY_SEPARATOR.'views'; 
         if (empty($this->view)) {
             $fileName .= str_replace(
@@ -149,26 +129,49 @@ abstract class Base
         }
         if (!file_exists($fileName)) {
             throw new \Exception("tpl:{$fileName} not exist!");
-            return false;
+            return null;
         }
 
-        ob_start();
-        include $fileName;
-        $this->viewContent = ob_get_contents();
-        ob_end_clean();
-        
-        //加载布局
-        if (!empty($this->layout)) {
-            $fileName = APP_PATH.DIRECTORY_SEPARATOR.'layouts';
-            if (!empty($this->theme)) {
-                $fileName .= DIRECTORY_SEPARATOR.$this->theme;
-            }
-            $fileName .= DIRECTORY_SEPARATOR.$this->layout.$this->viewSuffix;
+        return $fileName;
+    }
 
-            include $fileName;
-        } else {
-            echo $this->viewContent;
+    /**
+     * 获取layout File
+     *
+     * @return string
+     */
+    final function getLayoutFile()
+    {
+        if (empty($this->layout)) {
+            return null;
         }
-        exit;
+
+        $fileName = APP_PATH.DIRECTORY_SEPARATOR.'layouts';
+        if (!empty($this->theme)) {
+            $fileName .= DIRECTORY_SEPARATOR.$this->theme;
+        }
+        $fileName .= DIRECTORY_SEPARATOR.$this->layout.$this->viewSuffix;
+
+        if (!file_exists($fileName)) {
+            throw new \Exception("LAYOUT-NO-EXISTS:{$fileName}");
+            return null;
+        }
+        return $fileName;
+    }
+
+    /**
+     * 获取头部headers
+     *
+     * @return array
+     */
+    final function getHeaders() {
+        $charset = $this->getConfig('charset');
+
+        $this->headers = array_merge(
+            array('Content-type' => "text/html; charset={$charset}"),
+            $this->headers 
+        );
+
+        return $this->headers;
     }
 }
