@@ -13,7 +13,8 @@
             "Boot\\": "boot", 
             "Controllers\\": "controllers", 
             "Core\\": "core",
-            "Models\\": "models"
+            "Models\\": "models",
+            "Response\\": "response"
         }
     },
     "authors": [

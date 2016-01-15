@@ -13,7 +13,7 @@
 namespace Response;
 
 use Core\Single;
-use Controllers\Base as Controller;
+use Core\Config;
 
 /**
  * Render.php
@@ -41,7 +41,7 @@ class Render
     /**
      * 设置头部
      *
-     * @param string $key Content-type
+     * @param string $key   Content-type
      * @param string $value value
      *
      * @return \Response\Render
@@ -54,7 +54,7 @@ class Render
     /**
      * 设置头部
      *
-     * @param array $headers
+     * @param array $headers headers
      *
      * @return \Response\Render
      */
@@ -113,6 +113,19 @@ class Render
         }
         echo $str;
         exit;
+    }
+
+    /**
+     * 获取config文件值
+     *
+     * @param string $key  key
+     * @param string $item item 
+     *
+     * @return string|int|array|null
+     */
+    public function getConfig($key=null, $item=null)
+    {
+        return Config::get($key, $item);
     }
 }
 

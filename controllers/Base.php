@@ -115,18 +115,10 @@ abstract class Base
      *
      * @return string
      */
-    final public function getViewFile() {
+    final public function getViewFile()
+    {
         $fileName = APP_PATH.DIRECTORY_SEPARATOR.'views'; 
-        if (empty($this->view)) {
-            $fileName .= str_replace(
-                array("\\", 'Controllers'), 
-                array(DIRECTORY_SEPARATOR, ''), 
-                get_class($this)
-            ); 
-            $fileName .= DIRECTORY_SEPARATOR.$action.$this->viewSuffix;
-        } else {
-            $fileName .= DIRECTORY_SEPARATOR.$this->view.$this->viewSuffix;
-        }
+        $fileName .= DIRECTORY_SEPARATOR.$this->view.$this->viewSuffix;
         if (!file_exists($fileName)) {
             throw new \Exception("tpl:{$fileName} not exist!");
             return null;
@@ -164,7 +156,8 @@ abstract class Base
      *
      * @return array
      */
-    final function getHeaders() {
+    final function getHeaders()
+    {
         $charset = $this->getConfig('charset');
 
         $this->headers = array_merge(
@@ -173,5 +166,14 @@ abstract class Base
         );
 
         return $this->headers;
+    }
+    /**
+     * 获取view
+     *
+     * @return string
+     */
+    final public function getView()
+    {
+        return $this->view;
     }
 }

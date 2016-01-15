@@ -138,7 +138,7 @@ class Init
 
         $data = call_user_func_array(array($ctrl, $action), $params);
 
-        if (php_sapi_name() == 'cli') {
+        if (php_sapi_name() == 'cli' || empty($ctrl->getView())) {
             Render::getInstance()->output($data);
         }
 
