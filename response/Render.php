@@ -78,9 +78,7 @@ class Render
      */
     public function view($data, $viewFile, $layoutFile)
     {
-        foreach ($this->headers as $k => $v) {
-            header("{$k}: {$v}");
-        }
+        $this->header(); 
         $this->response = $data;
 
         ob_start();
@@ -99,12 +97,30 @@ class Render
     /**
      * 输出结果
      *
-     * @param string $data 数据
+     * @return boolean
+     */
+    protected function header()
+    {
+        foreach ($this->headers as $k => $v) {
+            header("{$k}: {$v}");
+        }
+        return true;
+    }
+
+    /**
+     * 输出结果
+     *
+     * @param string $data       数据
+     * @param bool   $headerFlag 是否输出header
      *
      * @return void 
      */
-    public function output($data)
+    public function output($data, $headerFlag=true)
     {
+        if (!empty($headerFlag)) {
+            $this->header();
+        }
+
         $str = '';
         if (is_array($data) || is_object($data)) {
             $str = json_encode($data);
