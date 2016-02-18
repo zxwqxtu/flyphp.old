@@ -10,10 +10,10 @@
  * @tag      Boot Route 
  * @version  GIT: $Id$
  */
-namespace Boot;
+namespace FlyPhp\Boot;
 
-use Core\Single;
-use Core\Config;
+use FlyPhp\Core\Single;
+use FlyPhp\Core\Config;
 
 /**
  * Boot\Route

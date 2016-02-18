@@ -10,11 +10,12 @@
  * @tag      Boot Init 
  * @version  GIT: $Id$
  */
-namespace Boot;
+namespace FlyPhp\Boot;
 
-use Core\Config;
-use Core\Single;
-use Boot\Route;
+use FlyPhp\Core\Config;
+use FlyPhp\Core\Single;
+use FlyPhp\Boot\Route;
+use FlyPhp\Response\Render;
 
 /**
  * Boot\Init
@@ -104,7 +105,6 @@ class Init
                 if (!empty($realFile)) {
                     require_once $realFile;    
                 }
-
             }
         }
     }
@@ -121,7 +121,7 @@ class Init
         $params = $this->_route->getParams();
 
         $controller = empty($controller) ? Config::get('indexController') : $controller;
-        $className = "Controllers\\".ucfirst($controller);
+        $className = "App\\Controllers\\".ucfirst($controller);
         if (!class_exists($className)) {
             throw new \Exception("controller:{$controller} not exists!");
             return false;
@@ -131,11 +131,22 @@ class Init
 
         $action = empty($action) ? $ctrl->getDefaultAction(): $action;
         if (!empty($action) && !method_exists($className, $action)) {
-            throw new \Exception("controller:{$controller} action:{$action} not exists!");
+            throw new \Exception("CONTROLLER-NO-EXISTS:{$controller}->{$action}");
             return false;
         }
 
-        call_user_func_array(array($ctrl, 'output'), array($action, $params));
+        $data = call_user_func_array(array($ctrl, $action), $params);
+
+        if (php_sapi_name() == 'cli') {
+            Render::getInstance()->output($data, false);
+        } elseif (empty($ctrl->getView())) {
+            Render::getInstance()->output($data, true);
+        } elseif (isset($_SERVER['Content-Type']) && $_SERVER['Content-Type'] == 'application/json') {
+            Render::getInstance()->output($data, true);
+        }
+
+        Render::getInstance()->setHeaders($ctrl->getHeaders())
+            ->view($data, $ctrl->getViewFile(), $ctrl->getLayoutFile());
 
         return true;
     }

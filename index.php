@@ -11,6 +11,6 @@ define('ROOT_PATH', dirname(SYSTEM_PATH));
 
 //自动注册，包含类所在的文件
 require SYSTEM_PATH.'/core/AutoLoader.php';
-spl_autoload_register(array(new Core\AutoLoader(),'load'));
+spl_autoload_register(array(new \FlyPhp\Core\AutoLoader(),'load'));
 
-Boot\Init::getInstance()->start(); 
+\FlyPhp\Boot\Init::getInstance()->start(); 

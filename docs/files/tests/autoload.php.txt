@@ -7,3 +7,4 @@ define('ROOT_PATH', dirname(SYSTEM_PATH));
 require SYSTEM_PATH.'/core/AutoLoader.php';
 spl_autoload_register(array(new FlyPhp\Core\AutoLoader(),'load'));
 
+

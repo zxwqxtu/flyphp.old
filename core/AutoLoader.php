@@ -10,7 +10,7 @@
  * @tag      AutoLoader
  * @version  GIT: $Id$
  */
-namespace Core;
+namespace FlyPhp\Core;
 
 /**
  * Core\AutoLoader

@@ -10,12 +10,12 @@
  * @tag      Boot Init 
  * @version  GIT: $Id$
  */
-namespace Boot;
+namespace FlyPhp\Boot;
 
-use Core\Config;
-use Core\Single;
-use Boot\Route;
-use Response\Render;
+use FlyPhp\Core\Config;
+use FlyPhp\Core\Single;
+use FlyPhp\Boot\Route;
+use FlyPhp\Response\Render;
 
 /**
  * Boot\Init
@@ -105,7 +105,6 @@ class Init
                 if (!empty($realFile)) {
                     require_once $realFile;    
                 }
-
             }
         }
     }
@@ -122,7 +121,7 @@ class Init
         $params = $this->_route->getParams();
 
         $controller = empty($controller) ? Config::get('indexController') : $controller;
-        $className = "Controllers\\".ucfirst($controller);
+        $className = "App\\Controllers\\".ucfirst($controller);
         if (!class_exists($className)) {
             throw new \Exception("controller:{$controller} not exists!");
             return false;
