@@ -10,9 +10,9 @@
  * @tag      Controllers Base
  * @version  GIT: $Id$
  */
-namespace Controllers;
+namespace FlyPhp\Controllers;
 
-use Core\Config;
+use FlyPhp\Core\Config;
 
 /**
  * Base.php

@@ -10,7 +10,7 @@
  * @tag      Core Single 
  * @version  GIT: $Id$
  */
-namespace Core;
+namespace FlyPhp\Core;
 
 /**
  * Core\Single
