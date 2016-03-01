@@ -10,7 +10,7 @@ define('SYSTEM_PATH', __DIR__);
 define('ROOT_PATH', dirname(SYSTEM_PATH));
 
 //自动注册，包含类所在的文件
-require SYSTEM_PATH.'/core/AutoLoader.php';
-spl_autoload_register(array(new \FlyPhp\Core\AutoLoader(),'load'));
+require SYSTEM_PATH.'/vendor/autoload.php';
+spl_autoload_register(array(new \FlyPhp\Core\AutoLoader(),'loadApp'));
 
 \FlyPhp\Boot\Init::getInstance()->start(); 

@@ -47,7 +47,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('vvv'), $arr['kkk']);
 
         $arr = Config::load('config', true);
-        $this->assertLessThan(count($arr['importClassPath']), 3);
 
         $this->assertEmpty(Config::load('xsfskfs'));
     }

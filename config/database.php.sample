@@ -1,0 +1,40 @@
+<?php
+/**
+ * 数据库配置文件
+ *
+ */
+return array(
+    'mongodb' => array(
+        'default' => array(
+            'server' => 'mongodb://10.100.2.77:27017', 
+            'options' => array(),
+            'dbName' => 'hntvads'
+        ),
+        'default2' => array(
+            "server" => 'mongodb://10.100.2.33:27017,10.100.2.15:27017,10.100.2.6:27017',
+            'options' => array(
+                'replicaSet' => 'ipddb',
+                'readPreference' => \MongoClient::RP_PRIMARY_PREFERRED,
+            ),
+            'dbName' => 'hntvads'
+        )       
+    ),
+
+    'mysql' => array(
+        'default' => array(
+            'host' => '127.0.0.1',
+            'user' => '',
+            'pass' => '',
+            'dbName' => 'test',
+            'attributes' => array(),
+        ),
+        'default2' => array(
+            'host' => '127.0.0.1',
+            'user' => '',
+            'pass' => '',
+            'dbName' => 'test2',
+            'attributes' => array(),
+        ),
+    )
+   
+);

@@ -8,7 +8,7 @@ $appName = $_SERVER['argv'][1];
 
 $appPath = dirname(dirname(__DIR__))."/app/{$appName}";
 
-$pathes = array('controllers', 'models', 'views', 'layouts', 'config');
+$pathes = array('src/Controllers', 'src/Models', 'views', 'layouts', 'config');
 foreach ($pathes as $v) {
     $path = $appPath."/{$v}";
     !is_dir($path) && mkdir($path, 0777, true);
