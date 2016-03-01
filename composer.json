@@ -3,18 +3,20 @@
     "description": "php framework easy simple",
     "keywords": ["flyPHP", "php", "framework"],
     "homepage": "https://github.com/zxwqxtu/flyPHP",
-    "type": "library",
+    "type": "project",
     "require": {
-        "php": ">=5.3",
-        "zxwqxtu/phplib": "1.0.0"
+        "php": ">=5.4.0",
+        "zxwqxtu/phpdb": "dev-master"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/zxwqxtu/phpdb.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
-            "Boot\\": "boot", 
-            "Controllers\\": "controllers", 
-            "Core\\": "core",
-            "Models\\": "models",
-            "Response\\": "response"
+            "FlyPhp\\": ""
         }
     },
     "authors": [
