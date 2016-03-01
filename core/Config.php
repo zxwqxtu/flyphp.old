@@ -51,7 +51,7 @@ class Config
     {
         $files = array(
             SYSTEM_PATH.DIRECTORY_SEPARATOR."config/{$file}.php",
-            ROOT_PATH.DIRECTORY_SEPARATOR."app/config/{$file}.php",
+            ROOT_PATH.DIRECTORY_SEPARATOR."config/{$file}.php",
         );
         if (defined('APP_PATH')) {
             $files[] = APP_PATH.DIRECTORY_SEPARATOR."config/{$file}.php";
@@ -142,9 +142,9 @@ class Config
      *
      * @return array|string|null;
      */
-    public static function getAppRoot($item, $file='config')
+    public static function getRoot($item, $file='config')
     {
-        $config = self::getByFile(ROOT_PATH.'/app', $file);
+        $config = self::getByFile(ROOT_PATH, $file);
 
         return isset($config[$item])? $config[$item]: null;
     }

@@ -91,7 +91,7 @@ class Init
     {
         $arr = array(
             SYSTEM_PATH => Config::getSystem('require'),
-            ROOT_PATH.'/app' => Config::getAppRoot('require'),
+            ROOT_PATH => Config::getRoot('require'),
             APP_PATH => Config::getApp('require')
         );
 

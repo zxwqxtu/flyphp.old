@@ -108,7 +108,7 @@ class AutoLoader
             }
         }
 
-        $file = ROOT_PATH.DIRECTORY_SEPARATOR.'app/config/config.php';
+        $file = ROOT_PATH.DIRECTORY_SEPARATOR.'config/config.php';
         if (file_exists($file)) {
             $config = include $file;
             if (!empty($config['importClassPath'])) {
