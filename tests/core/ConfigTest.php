@@ -18,7 +18,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $file = SYSTEM_PATH."/config/{$this->testFile}.php";
         file_put_contents($file, "<?php return ".var_export($config, true).";");
 
-        $file = ROOT_PATH."/app/config/{$this->testFile}.php";
+        $file = ROOT_PATH."/config/{$this->testFile}.php";
         file_put_contents($file, "<?php return ".var_export($config, true).";");
     }
 
@@ -27,7 +27,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $file = SYSTEM_PATH."/config/{$this->testFile}.php";
         unlink($file);
 
-        $file = ROOT_PATH."/app/config/{$this->testFile}.php";
+        $file = ROOT_PATH."/config/{$this->testFile}.php";
         unlink($file);
     }
 
@@ -62,10 +62,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Config::getSystem('debug'));
     }
  
-    public function testGetAppRoot()
+    public function testGetRoot()
     {
-        $this->assertNull(Config::getAppRoot('debug', 'iuyfttds'));
-        $this->assertTrue(Config::getAppRoot('debug', $this->testFile));
+        $this->assertNull(Config::getRoot('debug', 'iuyfttds'));
+        $this->assertTrue(Config::getRoot('debug', $this->testFile));
     }
 
     public function testGetApp()
