@@ -58,7 +58,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSystem()
     {
-        $this->assertFalse(Config::getSystem('debug'));
+        $this->assertTrue(Config::getSystem('debug', $this->testFile));
     }
  
     public function testGetRoot()
