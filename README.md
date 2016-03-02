@@ -75,3 +75,6 @@ php flyPHP/index.php {项目名} {controller} {action} {param1} {param2}...
         return array(
             'test/main/kkkk' => 'test/index' //用test/main/kkkk 代替 test/index访问
         );
+
+## 推荐安装方式 ##
+composer create-project zxwqxtu/flyphp framework dev-master
