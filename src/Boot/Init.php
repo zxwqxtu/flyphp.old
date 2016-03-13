@@ -123,7 +123,7 @@ class Init
         $controller = empty($controller) ? Config::get('indexController') : $controller;
         $className = "App\\Controllers\\".ucfirst($controller);
         if (!class_exists($className)) {
-            throw new \Exception("controller:{$controller} not exists!");
+            throw new \Exception("CONTROLLER-NO-EXISTS:{$controller}");
             return false;
         }
 
@@ -131,7 +131,7 @@ class Init
 
         $action = empty($action) ? $ctrl->getDefaultAction(): $action;
         if (!empty($action) && !method_exists($className, $action)) {
-            throw new \Exception("CONTROLLER-NO-EXISTS:{$controller}->{$action}");
+            throw new \Exception("ACTION-NO-EXISTS:{$controller}->{$action}");
             return false;
         }
 

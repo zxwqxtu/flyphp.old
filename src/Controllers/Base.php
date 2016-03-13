@@ -13,6 +13,7 @@
 namespace FlyPhp\Controllers;
 
 use FlyPhp\Core\Config;
+use FlyPhp\Request\Request;
 
 /**
  * Base.php
@@ -49,11 +50,15 @@ abstract class Base
     /** @var array 头部 */
     protected $headers = array();
 
+    /** @var array 头部 */
+    protected $request = null;
+
     /**
      * 构造函数，不能被继承
      */
     final public function __construct()
     {
+        $this->request = Request::getInstance();
         $this->init();
     }
 
