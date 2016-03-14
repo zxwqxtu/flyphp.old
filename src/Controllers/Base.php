@@ -59,7 +59,19 @@ abstract class Base
     final public function __construct()
     {
         $this->request = Request::getInstance();
+
+        $this->beforeInit();
         $this->init();
+    }
+
+    /**
+     * 执行初始化之前
+     *
+     * @return bool 
+     */
+    protected function beforeInit()
+    {
+        return true;
     }
 
     /**
