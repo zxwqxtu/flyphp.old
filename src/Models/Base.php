@@ -52,7 +52,7 @@ abstract class Base
             $dbClass = '\PhpDb\Mongodb\PhpMongo';
             break;
         default:
-            $dbClass = '\PhpDb\Mysql\PhpPdo';
+            $dbClass = '\PhpDb\Pdo\PhpPdo';
         } 
 
         $this->db = $dbClass::getInstance()->connect($config, $this->dbType);

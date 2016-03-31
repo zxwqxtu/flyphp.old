@@ -24,8 +24,8 @@ namespace FlyPhp\Core;
 
 Trait Single
 {
-    /** @var object|null 实例对象 */
-    private static $_instance = null;
+    /** @var array 实例对象 */
+    private static $_instance = array();
 
     /**
      * 构造函数
@@ -53,10 +53,11 @@ Trait Single
      */
     final public static function getInstance()
     {
-        if (empty(self::$_instance)) {
-            $className = get_called_class();
-            self::$_instance = new $className();
+        $className = get_called_class();
+
+        if (empty(self::$_instance[$className])) {
+            self::$_instance[$className] = new $className();
         }        
-        return self::$_instance;
+        return self::$_instance[$className];
     }
 }
