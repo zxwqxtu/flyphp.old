@@ -32,7 +32,7 @@ abstract class Base
     /** @var string 数据库类型 */
     protected $dbType = 'mysql';
 
-    /** @var string 数据库类型 */
+    /** @var string 数据库配置 */
     protected $dbSelect= 'default';
 
     /** @var object 数据库 */
@@ -52,9 +52,9 @@ abstract class Base
             $dbClass = '\PhpDb\Mongodb\PhpMongo';
             break;
         default:
-            $dbClass = '\PhpDb\Mysql\PhpMysql';
+            $dbClass = '\PhpDb\Mysql\PhpPdo';
         } 
 
-        $this->db = $dbClass::getInstance()->connect($config);
+        $this->db = $dbClass::getInstance()->connect($config, $this->dbType);
     }
 }
