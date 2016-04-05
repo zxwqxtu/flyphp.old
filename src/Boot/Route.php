@@ -83,21 +83,11 @@ class Route
      */
     final public function urlToClass()
     {
-        $routeArr = $this->_route;
-        $indexKey = array_search('index.php', $routeArr);
-        //采用默认crontroller action
-        if ($indexKey === false) {
-            return false;
-        }
-
-        isset($routeArr[$indexKey+1]) && ($this->_controller = $routeArr[$indexKey+1]);
-        isset($routeArr[$indexKey+2]) && ($this->_action = $routeArr[$indexKey+2]);
-        isset($routeArr[$indexKey+3]) && ($this->_params = array_slice($routeArr, $indexKey+3));
-
-        //url重定向
-        if ($this->urlRewrite()) {
-            return true;
-        }
+        $routeArr = $this->urlRewrite($this->_route);
+        
+        isset($routeArr[0]) && ($this->_controller = $routeArr[0]);
+        isset($routeArr[1]) && ($this->_action = $routeArr[1]);
+        isset($routeArr[2]) && ($this->_params = array_slice($routeArr, 2));
 
         $this->_controller = $this->seoUrl($this->_controller);
         $this->_action = $this->seoUrl($this->_action);
@@ -110,17 +100,18 @@ class Route
      *
      * @return boolean 
      */
-    protected function urlRewrite()
+    protected function urlRewrite($routeArr)
     {
-        $url = "{$this->_controller}/{$this->_action}";
+        $indexKey = array_search('index.php', $routeArr);
+        $newRoute = array_slice($routeArr, $indexKey+1);
+
+        $url = '/'.implode('/', $newRoute);
         $_url = Config::route($url);
         if (empty($_url)) {
-            return false; 
+            return $newRoute; 
         }
         
-        list($this->_controller, $this->_action) = explode('/', $_url);
-
-        return true;
+        return explode('/', trim($_url, '/'));
     }
 
     /**

@@ -69,6 +69,7 @@ class Request
         case 'files':
             return $_FILES;
         case 'session':
+            session_status() != PHP_SESSION_ACTIVE && session_start();
             return $_SESSION;
         case 'cookie':
             return $_COOKIE;
